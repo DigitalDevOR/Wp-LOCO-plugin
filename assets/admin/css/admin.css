@@ -1,0 +1,22 @@
+.widget-loco-admin {
+    max-width: 900px;
+}
+
+.widget-loco-admin-card {
+    margin-top: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+}
+
+.widget-loco-admin-card h2 {
+    margin-top: 0;
+}
+
+.widget-loco-admin code {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #f6f7f7;
+    border-radius: 4px;
+}
