@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('WIDGET_LOCO_VERSION', '1.0.0');
+define('WIDGET_LOCO_VERSION', '1.1.0');
 define('WIDGET_LOCO_FILE', __FILE__);
 define('WIDGET_LOCO_PATH', plugin_dir_path(__FILE__));
 define('WIDGET_LOCO_URL', plugin_dir_url(__FILE__));
