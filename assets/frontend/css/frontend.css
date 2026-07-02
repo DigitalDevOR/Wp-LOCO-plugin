@@ -12,7 +12,15 @@
     --font-body: 'Inter', sans-serif;
     --surface: #f4f8fb;
     --border-light: rgba(0,0,0,0.08);
-
+    /* Landing page */
+    --cherry:    #E4293D;
+    --gold:      #FFB800;
+    --navy:      #0F1A3D;
+    --ink:       #14161C;
+    --grey:      #6B7280;
+    --line:      #E7EDF2;
+    --sky:       #F3FAFD;
+    --blue-deep: #1478A3;
 }
 
 body {
@@ -28,6 +36,15 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 100vh;
+}
+
+.LOCO_main_login {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .LOCO_header {
@@ -51,8 +68,8 @@ body {
 }
 
 .LOCO_header_img {
-    width: 36px;
-    aspect-ratio: 1/1;
+    width: 50.03px;
+    height: 38px;
 }
 
 .LOCO_centered_p {
@@ -62,12 +79,12 @@ body {
 }
 
 .LOCO_eyebrow {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 2.76px;
     text-transform: uppercase;
-    color: var(--kk-blue);
+    color: rgb(33, 150, 200);
 }
 
 .LOCO_loghi {
@@ -644,4 +661,571 @@ body {
     .LOCO_form_grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ═══════════════════════════════════════
+   LOCO_li_ — Landing page (logged-in)
+═══════════════════════════════════════ */
+
+/* ── Hero ── */
+.LOCO_li_hero {
+    position: relative;
+    background:
+        radial-gradient(circle at 15% 0%, rgba(33,150,200,0.14), transparent 55%),
+        radial-gradient(circle at 90% 30%, rgba(228,41,61,0.08), transparent 50%),
+        linear-gradient(180deg, var(--sky) 0%, #ffffff 70%);
+    padding: 44px 20px 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.LOCO_li_hero_content {
+    max-width: 480px;
+    width: 100%;
+}
+
+.LOCO_li_partner_row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+    margin-bottom: 24px;
+}
+
+.LOCO_li_kk_mini {
+    height: 26px !important;
+    width: auto;
+}
+
+.LOCO_li_x_mark {
+    color: var(--cherry);
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.LOCO_li_pacha_chip {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    color: var(--cherry);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1.5px solid rgba(228,41,61,0.25);
+    border-radius: 8px;
+    padding: 4px 10px;
+}
+
+.LOCO_li_gordo_chip {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    color: var(--navy);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 4px 12px;
+}
+
+.LOCO_li_hero_h1 {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+    line-height: 0.92;
+    color: var(--ink);
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.LOCO_li_ibiza {
+    display: block;
+    color: var(--kk-blue);
+    font-size: 92px;
+}
+
+.LOCO_li_photo_card {
+    margin: 26px auto 24px;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 4/3;
+    border-radius: 22px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 22px 44px -18px rgba(15,26,61,0.35);
+    border: 4px solid #fff;
+    outline: 1px solid var(--line);
+    background: var(--navy);
+}
+
+.LOCO_li_photo_card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.LOCO_li_ribbon {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 5px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.LOCO_li_caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 14px 16px 12px;
+    background: linear-gradient(180deg, transparent, rgba(15,26,61,0.75));
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 20px;
+    text-align: left;
+    letter-spacing: 0.04em;
+}
+
+.LOCO_li_hero_copy {
+    color: var(--grey);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.LOCO_li_hero_copy b {
+    color: var(--ink);
+}
+
+/* ── Countdown ── */
+.LOCO_li_countdown_section {
+    position: relative;
+    padding: 44px 20px 40px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.LOCO_li_countdown_bg {
+    position: absolute;
+    inset: 0;
+    background-color: var(--navy);
+    background-size: cover;
+    background-position: center 35%;
+    transform: scale(1.05);
+}
+
+.LOCO_li_countdown_overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15,26,61,0.82), rgba(15,26,61,0.9));
+}
+
+.LOCO_li_countdown_content {
+    position: relative;
+    z-index: 1;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+}
+
+.LOCO_li_deadline_pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    padding: 10px 18px;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+.LOCO_li_countdown {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 26px;
+}
+
+.LOCO_li_countdown > div {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 12px;
+    padding: 12px 6px;
+    width: 64px;
+    text-align: center;
+}
+
+.LOCO_li_num {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    color: #fff ;
+}
+
+.LOCO_li_lab {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+}
+
+/* ── Buttons ── */
+.LOCO_li_btn_primary {
+    display: block;
+    width: 100%;
+    background: linear-gradient(100deg, var(--kk-blue), var(--blue-deep));
+    color: #fff !important;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 17px;
+    padding: 19px;
+    border-radius: 999px;
+    text-align: center;
+    box-shadow: 0 14px 30px -10px rgba(33,150,200,0.55);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.LOCO_li_btn_primary:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px -10px rgba(33,150,200,0.7);
+}
+
+.LOCO_li_btn_secondary {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    background: transparent;
+    color: var(--grey);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13.5px;
+    padding: 14px;
+    border-radius: 999px;
+    text-align: center;
+    border: 1.5px solid var(--line);
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+
+.LOCO_li_btn_secondary--light {
+    color: rgba(255,255,255,0.85);
+    border-color: rgba(255,255,255,0.3);
+}
+
+/* ── Sections ── */
+.LOCO_li_section {
+    padding: 56px 20px;
+}
+
+.LOCO_li_section--tint {
+    background: var(--sky);
+}
+
+.LOCO_li_section_head {
+    text-align: center;
+    max-width: 440px;
+    margin: 0 auto 30px;
+}
+
+.LOCO_li_section_head h2 {
+    font-family: var(--font-heading);
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
+.LOCO_li_section_head p {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.55;
+}
+
+/* ── Code tiles ── */
+.LOCO_li_code_tiles {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.LOCO_li_tile {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(160deg, var(--cherry), #a3172a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 26px;
+    color: #fff;
+    box-shadow: 0 8px 18px -6px rgba(228,41,61,0.4);
+    position: relative;
+}
+
+.LOCO_li_tile::after {
+    content: '🍒';
+    position: absolute;
+    top: -10px;
+    right: -6px;
+    font-size: 14px;
+}
+
+.LOCO_li_tile--locked {
+    background: #fff;
+    border: 1.5px dashed #C6CDD6;
+    color: #C6CDD6;
+    box-shadow: none;
+}
+
+.LOCO_li_tile--locked::after {
+    content: '';
+}
+
+/* ── Steps ── */
+.LOCO_li_steps {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.LOCO_li_step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.LOCO_li_step_n {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--kk-blue);
+    min-width: 36px;
+    line-height: 1;
+}
+
+.LOCO_li_step h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: var(--ink);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    text-transform: none;
+}
+
+.LOCO_li_step p {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+/* ── Prize card ── */
+.LOCO_li_prize_card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px -22px rgba(15,26,61,0.3);
+}
+
+.LOCO_li_prize_band {
+    background: linear-gradient(100deg, var(--kk-blue), var(--blue-deep));
+    color: #fff;
+    padding: 20px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.LOCO_li_prize_band_label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    opacity: 0.85;
+}
+
+.LOCO_li_prize_band_val {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    background: var(--cherry);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.LOCO_li_prize_body {
+    padding: 22px;
+}
+
+.LOCO_li_prize_body h3 {
+    font-family: var(--font-heading);
+    font-size: 34px;
+    margin-bottom: 16px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
+.LOCO_li_prize_list {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.LOCO_li_prize_list > div {
+    display: flex;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink);
+    align-items: flex-start;
+    line-height: 1.4;
+}
+
+.LOCO_li_ico {
+    flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+    .LOCO_li_hero_h1 { font-size: 76px; }
+    .LOCO_li_ibiza   { font-size: 104px; }
+}
+
+/* ── Auth wrap (login + registrazione) ── */
+.LOCO_auth_wrap {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 48px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LOCO_login_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.LOCO_field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.LOCO_field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+}
+
+.LOCO_field input[type="text"],
+.LOCO_field input[type="email"],
+.LOCO_field input[type="password"] {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.LOCO_field input[type="text"]:focus,
+.LOCO_field input[type="email"]:focus,
+.LOCO_field input[type="password"]:focus {
+    border-color: var(--kk-blue);
+    box-shadow: 0 0 0 3px var(--kk-blue-glow);
+}
+
+.LOCO_field--checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.LOCO_field--checkbox label {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.LOCO_login_form .LOCO_cta {
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.LOCO_login_error {
+    width: 100%;
+    background: #fff0f0;
+    border: 1px solid #f5c2c2;
+    color: #c0392b;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.LOCO_login_success {
+    width: 100%;
+    background: #f0fff4;
+    border: 1px solid #a8e6be;
+    color: #1e7e44;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.LOCO_auth_toggle {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.LOCO_auth_toggle a {
+    color: var(--kk-blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.LOCO_auth_toggle a:hover {
+    text-decoration: underline;
 }

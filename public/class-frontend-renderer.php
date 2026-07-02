@@ -13,13 +13,18 @@ class Frontend_Renderer
      * Aggiungere qui ogni nuova view prima di usarla.
      */
     private const VIEWS = [
-        'guest'     => 'public/views/guest.php',
-        'logged-in' => 'public/views/logged-in.php',
+        'landing' => 'public/views/landing.php',
+        'guest'   => 'public/views/guest.php',
+        'form'    => 'public/views/logged-in.php',
     ];
 
     /**
      * Renderizza il frontend del plugin.
-     * Seleziona automaticamente la view in base allo stato di autenticazione.
+     *
+     * Routing basato su ?view=:
+     *   - (nessun param) → landing.php (sempre visibile)
+     *   - ?view=form     → form codice LOCO se autenticato, altrimenti login
+     *   - ?view=login    → login/registrazione se non autenticato, altrimenti form
      *
      * @param array $atts Attributi ricevuti dallo shortcode.
      *
@@ -27,22 +32,27 @@ class Frontend_Renderer
      */
     public function render(array $atts = []): string
     {
+        $view_param   = isset( $_GET['view'] ) ? sanitize_key( $_GET['view'] ) : '';
         $is_logged_in = is_user_logged_in();
-        $view         = $is_logged_in ? 'logged-in' : 'guest';
 
+        if ( $view_param === 'form' || $view_param === 'login' ) {
+            $view = $is_logged_in ? 'form' : 'guest';
+        } else {
+            $view = 'landing';
+        }
 
         $data = [
             'title' => $atts['title'] ?? 'Widget Loco',
         ];
 
-        if ($is_logged_in) {
+        if ( $is_logged_in ) {
             $user           = wp_get_current_user();
             $data['user']   = $user;
             $data['name']   = $user->display_name;
             $data['email']  = $user->user_email;
-            $data['avatar'] = get_avatar_url($user->ID);
+            $data['avatar'] = get_avatar_url( $user->ID );
         }
 
-        return widget_loco_view(self::VIEWS[$view], $data);
+        return widget_loco_view( self::VIEWS[ $view ], $data );
     }
 }
