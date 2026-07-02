@@ -22,7 +22,7 @@ class Shortcode
         add_shortcode('widget_loco', [$this, 'render']);
     }
 
-    public function render(array $atts = []): string
+    public function render($atts = []): string
     {
         wp_enqueue_style('widget-loco-frontend');
         wp_enqueue_script('widget-loco-frontend');
