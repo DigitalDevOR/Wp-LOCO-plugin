@@ -36,8 +36,10 @@ class Assets
             'widget-loco-frontend',
             'WidgetLoco',
             [
-                'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('widget_loco_nonce'),
+                'ajaxUrl'   => admin_url('admin-ajax.php'),
+                'nonce'     => wp_create_nonce('widget_loco_nonce'),
+                'restUrl'   => rest_url('widget-loco/v1'),
+                'restNonce' => wp_create_nonce('wp_rest'),
             ]
         );
     }

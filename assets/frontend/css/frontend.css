@@ -35,7 +35,6 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     min-height: 100vh;
 }
 
@@ -279,7 +278,7 @@ body {
     background: var(--surface);
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
-    padding: 80px 24px;
+    padding: 80px 24px 220px;
 }
 
 .LOCO_form_inner {
@@ -314,8 +313,7 @@ body {
 
 .LOCO_form_grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 12px;
 }
 
 .LOCO_form_grid .full {
@@ -443,12 +441,24 @@ body {
     margin-top: 28px;
     box-shadow: 0 4px 24px rgba(28, 153, 204, 0.35);
     transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    max-width:680px;
 }
 
 .LOCO_form_btn_submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 36px rgba(28, 153, 204, 0.5);
     background: var(--kk-blue);
+}
+
+.LOCO_form_error {
+    color: var(--cherry);
+    border: 1px solid var(--cherry);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .LOCO_one_shot_note {
