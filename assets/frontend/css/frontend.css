@@ -315,7 +315,7 @@ body {
 .LOCO_form_grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 80px;
 }
 
 .LOCO_form_grid .full {
@@ -329,9 +329,9 @@ body {
 }
 
 .LOCO_codice_loco_field {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px; letter-spacing: 4px; text-align: center;
-    color: var(--kk-blue); border-color: var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     font-family: "Inter", sans-serif;
 }
 

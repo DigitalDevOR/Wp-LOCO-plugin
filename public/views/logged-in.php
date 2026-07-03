@@ -41,33 +41,11 @@ if (!defined('ABSPATH')) {
 
                 <div class="LOCO_form_grid">
 
-                    <div class="LOCO_codice_loco_field">
-                        <label for="loco_nome"><?php esc_html_e( 'Nome *', 'widget-loco' ); ?></label>
-                        <input type="text" id="loco_nome" name="nome"
-                               placeholder="<?php esc_attr_e( 'Il tuo nome', 'widget-loco' ); ?>"
-                               autocomplete="given-name" required>
-                    </div>
-
-                    <div class="LOCO_codice_loco_field">
-                        <label for="loco_cognome"><?php esc_html_e( 'Cognome *', 'widget-loco' ); ?></label>
-                        <input type="text" id="loco_cognome" name="cognome"
-                               placeholder="<?php esc_attr_e( 'Il tuo cognome', 'widget-loco' ); ?>"
-                               autocomplete="family-name" required>
-                    </div>
-
-                    <div class="LOCO_codice_loco_field">
-                        <label for="loco_email"><?php esc_html_e( 'Email *', 'widget-loco' ); ?></label>
+                    <div class="LOCO_codice_loco_field full">
+                        <label for="loco_email"><?php esc_html_e( 'Email', 'widget-loco' ); ?></label>
                         <input type="email" id="loco_email" name="email"
-                               placeholder="nome@email.com"
                                value="<?php echo isset( $email ) ? esc_attr( $email ) : ''; ?>"
-                               autocomplete="email" required>
-                    </div>
-
-                    <div class="LOCO_codice_loco_field">
-                        <label for="loco_telefono"><?php esc_html_e( 'Telefono *', 'widget-loco' ); ?></label>
-                        <input type="tel" id="loco_telefono" name="telefono"
-                               placeholder="+39 000 000 0000"
-                               autocomplete="tel" required>
+                               readonly>
                     </div>
 
                     <div class="LOCO_codice_loco_field full">
@@ -79,7 +57,7 @@ if (!defined('ABSPATH')) {
 
                     <div class="LOCO_codice_loco_field full">
                         <p class="LOCO_form_motivazione_question">
-                            "<?php esc_html_e( 'Perché proprio tu dovresti vivere il Closing Party di Gordo al Pacha insieme a Radio Kiss Kiss?', 'widget-loco' ); ?>"
+                            "<?php esc_html_e( 'Perché proprio tu dovresti vincere il Closing Party di Gordo al Pacha?', 'widget-loco' ); ?>"
                         </p>
                         <textarea id="loco_motivazione" name="motivazione"
                                   maxlength="500"
@@ -113,7 +91,8 @@ if (!defined('ABSPATH')) {
             </form>
 
         </div><!-- .LOCO_form_inner -->
-    </div><!-- .LOCO_form_section -->
+    </div>
+    <!-- .LOCO_form_section -->
     <div style="width:100%; position:relative; bottom:0; left:0;">
         <?php include WIDGET_LOCO_PATH . 'public/views/partials/footer.php'; ?>
     </div>
