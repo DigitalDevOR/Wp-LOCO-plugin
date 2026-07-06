@@ -9,6 +9,7 @@
     --text-muted:#5a6a75;
     --text: black;
     --font-heading: 'Bebas Neue', sans-serif;
+    --font-body-secondary: 'Montserrat', sans-serif;
     --font-body: 'Inter', sans-serif;
     --surface: #f4f8fb;
     --border-light: rgba(0,0,0,0.08);
@@ -21,6 +22,17 @@
     --line:      #E7EDF2;
     --sky:       #F3FAFD;
     --blue-deep: #1478A3;
+}
+
+/* Previene il FOUC: box-sizing uniforme e immagini sempre contenute */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 body {
@@ -78,7 +90,7 @@ body {
 }
 
 .LOCO_eyebrow {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body-secondary);
     font-size: 11.5px;
     font-weight: 800;
     letter-spacing: 2.76px;
@@ -278,7 +290,7 @@ body {
     background: var(--surface);
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
-    padding: 80px 24px 220px;
+    padding: 200px 24px 200px;
 }
 
 .LOCO_form_inner {
@@ -292,8 +304,8 @@ body {
 }
 
 .LOCO_form_header_label {
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 800;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--kk-blue);
@@ -302,16 +314,31 @@ body {
 
 
 .LOCO_form_header_title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 6vw, 60px);
-    letter-spacing: 1px;
-    line-height: 1.05;
-    color: var(--text);
-    margin-bottom: 48px;
-    font-weight: 700;
+    font-family: var(--font-body-secondary);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 2.76px;
+    text-transform: uppercase;
+    color: var(--kk-blue);
+}
+
+.LOCO_already_candidate_header {
+    font-family: var(--font-heading);
+    font-size: 60px;
+    font-weight: 800;
+    letter-spacing: 2.76px;
+    text-transform: uppercase;
+}
+
+.LOCO_form_header_subtitle {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-muted);
+    letter-spacing: 0.9px;
 }
 
 .LOCO_form_grid {
+    width:100%;
     display: grid;
     gap: 12px;
 }
@@ -326,6 +353,22 @@ body {
     gap: 6px;
 }
 
+.LOCO_form_success {
+    width: fit-content;
+    border: 1px solid green;
+    padding: 20px;
+    border-radius: 10px;
+    color: green;
+    background-color: #00800012;
+}
+
+.LOCO_code_form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .LOCO_codice_loco_field {
     display: flex;
     flex-direction: column;
@@ -333,7 +376,11 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-.LOCO_codice_loco_field input {
+.full {
+    width: 100%;
+}
+
+.LOCO_codice_loco_field input:not([type="checkbox"]):not([type="radio"]) {
     background: #ffffff;
     border: 1px solid var(--border-light);
     border-radius: 12px;
@@ -344,11 +391,12 @@ body {
     transition: border-color 0.2s, box-shadow 0.2s;
     outline: none;
     width: 100%;
+    box-sizing: border-box;
     resize: none;
 }
 
 
-.LOCO_codice_loco_field input:focus {
+.LOCO_codice_loco_field input:not([type="checkbox"]):not([type="radio"]):focus {
     border-color: var(--kk-blue);
     box-shadow: 0 0 0 3px var(--kk-blue-glow);
 }
@@ -419,7 +467,10 @@ body {
 }
 
 .LOCO_form_privacy_note input[type="checkbox"] {
-    width: min-content;
+    width: auto;
+    flex-shrink: 0;
+    transition: none;
+    accent-color: var(--kk-blue);
 }
 
 .LOCO_form_privacy_note span {
@@ -427,25 +478,25 @@ body {
 }
 
 .LOCO_form_btn_submit {
-    width: 100%;
-    background: var(--kk-blue);
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 20px;
-    border-radius: 60px;
-    border: none;
-    cursor: pointer;
-    margin-top: 28px;
-    box-shadow: 0 4px 24px rgba(28, 153, 204, 0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    max-width:680px;
+    width: 100% !important;
+    background: var(--kk-blue) !important;
+    color: #fff !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    padding: 20px !important;
+    border-radius: 60px !important;
+    border: none !important;
+    cursor: pointer !important;
+    margin-top: 28px !important;
+    box-shadow: 0 4px 24px rgba(28, 153, 204, 0.35) !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 30px !important;
+    max-width:680px !important;
 }
 
 .LOCO_form_btn_submit:hover {
@@ -706,7 +757,7 @@ body {
 }
 
 .LOCO_li_kk_mini {
-    height: 26px !important;
+    height: 40px !important;
     width: auto;
 }
 
@@ -801,6 +852,7 @@ body {
 }
 
 .LOCO_li_hero_copy {
+    font-family: var(--font-body-secondary);
     color: var(--grey);
     font-size: 15px;
     line-height: 1.6;
@@ -844,6 +896,7 @@ body {
 }
 
 .LOCO_li_deadline_pill {
+    font-family: var(--font-body-secondary) !important;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -880,6 +933,7 @@ body {
 }
 
 .LOCO_li_lab {
+    font-family: var(--font-body-secondary) !important;
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -936,11 +990,13 @@ body {
 
 /* ── Sections ── */
 .LOCO_li_section {
-    padding: 56px 20px;
+    padding-top:50px;
 }
 
 .LOCO_li_section--tint {
     background: var(--sky);
+    padding-top:50px;
+    padding-bottom:50px;
 }
 
 .LOCO_li_section_head {
@@ -950,6 +1006,7 @@ body {
 }
 
 .LOCO_li_section_head h2 {
+    font-weight: 700;
     font-family: var(--font-heading);
     font-size: 38px;
     margin-bottom: 10px;
@@ -959,6 +1016,7 @@ body {
 }
 
 .LOCO_li_section_head p {
+    font-family: var(--font-body-secondary) !important;
     font-size: 14px;
     color: var(--grey);
     line-height: 1.55;
@@ -1034,14 +1092,14 @@ body {
 }
 
 .LOCO_li_step h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
+    font-family: var(--font-body-secondary) !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
     margin-bottom: 4px;
     color: var(--ink);
-    line-height: 0.92;
+    line-height: 0.92 !important;
     letter-spacing: 0.02em;
-    text-transform: none;
+    text-transform: none !important;
 }
 
 .LOCO_li_step p {
@@ -1073,6 +1131,7 @@ body {
 }
 
 .LOCO_li_prize_band_label {
+    font-family: var(--font-heading);
     font-size: 11px;
     letter-spacing: 0.14em;
     font-weight: 700;
@@ -1093,7 +1152,7 @@ body {
 
 .LOCO_li_prize_body h3 {
     font-family: var(--font-heading);
-    font-size: 34px;
+    font-size: 29px !important;
     margin-bottom: 16px;
     color: var(--ink);
     letter-spacing: 0.02em;
@@ -1117,6 +1176,8 @@ body {
 
 .LOCO_li_ico {
     flex-shrink: 0;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
 }
 
 @media (min-width: 640px) {
@@ -1192,9 +1253,18 @@ body {
 }
 
 .LOCO_login_form .LOCO_cta {
+    height: 50px;
     width: 100%;
     justify-content: center;
     margin-top: 4px;
+    border-radius:10px;
+    background: var(--kk-blue);
+    color: #fff;
+    border: none;
+}
+
+.LOCO_login_form .LOCO_cta:hover {
+    background: var(--kk-blue);
 }
 
 .LOCO_login_error {
@@ -1238,4 +1308,14 @@ body {
 
 .LOCO_auth_toggle a:hover {
     text-decoration: underline;
+}
+
+.LOCO_premio_backgorund {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-attachment: local;
+    background-origin: border-box;
+    background-clip: unset;
 }

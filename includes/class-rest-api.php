@@ -31,6 +31,12 @@ class Rest_Api
             'callback'            => [$this, 'handleTest'],
             'permission_callback' => '__return_true',
         ]);
+
+        register_rest_route('widget-loco/v1', '/submit-form', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'handleLocoForm'],
+            'permission_callback' => '__return_true',
+        ]);
     }
 
     /**
@@ -95,18 +101,7 @@ class Rest_Api
             $redirect_to
         );
 
-        // Verifica nonce
-        if (
-            ! isset($_POST['loco_register_nonce']) ||
-            ! wp_verify_nonce(
-                sanitize_text_field(wp_unslash($_POST['loco_register_nonce'])),
-                'loco-register-nonce'
-            )
-        ) {
-            wp_safe_redirect(add_query_arg(['reg' => 'error', 'err' => 'nonce'], $register_url));
-            exit;
-        }
-
+      
         // Controlla se la registrazione è abilitata in WordPress
         if (! get_option('users_can_register')) {
             wp_safe_redirect(add_query_arg(['reg' => 'error', 'err' => 'disabled'], $register_url));
@@ -172,5 +167,146 @@ class Rest_Api
         // Reindirizza alla form del codice LOCO
         wp_safe_redirect($redirect_to);
         exit;
+    }
+
+    /**
+     * Gestisce il form di candidatura via REST API.
+     */
+    public function handleLocoForm(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $user = wp_get_current_user();
+
+        if ($user->ID === 0) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Utente non loggato.',
+            ], 401);
+        }
+
+        $userMail    = $user->user_email;
+        $email       = sanitize_email($request->get_param('email') ?? '');
+        $nome        = sanitize_text_field($request->get_param('nome') ?? '');
+        $cognome     = sanitize_text_field($request->get_param('cognome') ?? '');
+        $codice_1    = sanitize_text_field($request->get_param('codice_loco_1') ?? '');
+        $codice_2    = sanitize_text_field($request->get_param('codice_loco_2') ?? '');
+        $codice_3    = sanitize_text_field($request->get_param('codice_loco_3') ?? '');
+        $codice_4    = sanitize_text_field($request->get_param('codice_loco_4') ?? '');
+        $codice_5    = sanitize_text_field($request->get_param('codice_loco_5') ?? '');
+        $motivazione = sanitize_textarea_field($request->get_param('motivazione') ?? '');
+        $urlSocial   = trim(wp_strip_all_tags(wp_unslash((string) ($request->get_param('urlSocial') ?? ''))));
+        $privacy     = (bool) $request->get_param('privacy');
+        $age         = (bool) $request->get_param('age');
+        $residenza   = (bool) $request->get_param('residenza');
+
+        // Campi obbligatori
+        if (empty($email) || empty($nome) || empty($cognome) || empty($codice_1) || empty($motivazione) || empty($urlSocial) || ! $privacy || ! $age || ! $residenza) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Compila tutti i campi obbligatori.',
+            ], 422);
+        }
+
+        // L'email deve corrispondere a quella dell'utente loggato
+        if ($userMail !== $email) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Impossibile partecipare al concorso.',
+            ], 422);
+        }
+
+        if (! is_email($email)) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Indirizzo email non valido.',
+            ], 422);
+        }
+
+        // Validazione URL social (Instagram o Facebook)
+        if (! $this->isValidSocialUrl($urlSocial)) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Inserisci un URL valido di Instagram o Facebook.',
+            ], 422);
+        }
+
+        // Controlla se l'utente ha già inviato una candidatura
+        if (Database::userHasSubmitted($user->ID)) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Hai già inviato una candidatura.',
+            ], 409);
+        }
+
+        // Calcolo validated
+        $validated = $privacy
+            && $age
+            && $residenza
+            && ! empty($motivazione)
+            && $this->areCodesValid($codice_1, $codice_2, $codice_3, $codice_4, $codice_5)
+            && $this->isValidSocialUrl($urlSocial);
+
+        // Salvataggio nel database
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '';
+
+        $inserted = Database::insertCandidatura([
+            'user_id'       => $user->ID,
+            'nome'          => $nome,
+            'cognome'       => $cognome,
+            'email'         => $email,
+            'codice_loco_1' => $codice_1,
+            'codice_loco_2' => $codice_2,
+            'codice_loco_3' => $codice_3,
+            'codice_loco_4' => $codice_4,
+            'codice_loco_5' => $codice_5,
+            'motivazione'   => $motivazione,
+            'urlSocial'     => $urlSocial,
+            'privacy'       => $privacy,
+            'age'           => $age,
+            'residenza'     => $residenza,
+            'validated'     => $validated ? 1 : 0,
+            'ip_address'    => $ip,
+        ]);
+
+        if ($inserted === false) {
+            return new \WP_REST_Response([
+                'success' => false,
+                'message' => 'Errore durante il salvataggio. Riprova.',
+                'error' => $inserted->get_error_message() ?? 'Errore sconosciuto',
+            ], 500);
+        }
+
+        return new \WP_REST_Response([
+            'success' => true,
+            'message' => 'Candidatura ricevuta! Ti contatteremo presto.',
+        ], 200);
+    }
+
+    /**
+     * Verifica che i codici LOCO inseriti siano corretti.
+     * TODO: implementare il confronto con i codici validi quando disponibili.
+     */
+    private function areCodesValid(string $c1, string $c2, string $c3, string $c4, string $c5): bool
+    {
+        if (empty($c1) || empty($c2) || empty($c3) || empty($c4) || empty($c5)) {
+            return false;
+        }
+
+        // TODO: aggiungere qui il confronto con i codici validi
+        return true;
+    }
+
+    /**
+     * Verifica che l'URL sia un profilo Instagram o Facebook valido.
+     */
+    private function isValidSocialUrl(string $url): bool
+    {
+        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+
+        $host = strtolower(parse_url($url, PHP_URL_HOST) ?? '');
+        $host = preg_replace('/^www\./', '', $host);
+
+        return in_array($host, ['instagram.com', 'facebook.com'], true);
     }
 }

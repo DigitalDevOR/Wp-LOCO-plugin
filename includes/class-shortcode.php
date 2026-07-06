@@ -24,9 +24,6 @@ class Shortcode
 
     public function render($atts = []): string
     {
-        wp_enqueue_style('widget-loco-frontend');
-        wp_enqueue_script('widget-loco-frontend');
-
         $atts = shortcode_atts([
             'title' => 'Widget Loco',
         ], $atts, 'widget_loco');

@@ -24,14 +24,24 @@ $loco_cta_url = is_user_logged_in()
                 <img class="LOCO_li_kk_mini"
                      src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/logo.png' ); ?>"
                      alt="<?php esc_attr_e( 'Kiss Kiss', 'widget-loco' ); ?>">
+                <!-- 
                 <div class="LOCO_li_x_mark">×</div>
                 <div class="LOCO_li_pacha_chip">🍒 PACHA</div>
+                -->
                 <div class="LOCO_li_x_mark">×</div>
-                <div class="LOCO_li_gordo_chip">GORDO</div>
+                <div class="LOCO_li_gordo_chip">
+                   <p style="margin: 0;"> GORDO </p>
+                </div>
             </div>
-
-            <h1 class="LOCO_li_hero_h1">VINCI<span class="LOCO_li_ibiza">IBIZA</span></h1>
-
+            
+            <!--
+                <h1 class="LOCO_li_hero_h1">VINCI<span class="LOCO_li_ibiza">IBIZA</span></h1>
+            -->
+            <div style="width:100%; display:flex; justify-content:center; align-items:center;">
+                <img src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/quantoseiloco.svg' ); ?>"
+                     alt="<?php esc_attr_e( 'Quanto sei LOCO', 'widget-loco' ); ?>"
+                     style="width: 100%; max-width: 800px; height: auto;">
+            </div>
             <div class="LOCO_li_photo_card">
                 <img src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/gordo-pacha.jpg' ); ?>"
                      alt="<?php esc_attr_e( 'Gordo al Pacha Ibiza', 'widget-loco' ); ?>">
@@ -83,14 +93,15 @@ $loco_cta_url = is_user_logged_in()
             </a>
         </div>
     </section>
-
-    <!-- ── IL CODICE LOCO ── -->
+     
+    <!-- ── IL CODICE LOCO ── 
     <section class="LOCO_li_section LOCO_li_section--tint" id="come-funziona">
         <div class="LOCO_li_section_head">
             <div class="LOCO_eyebrow"><?php esc_html_e( 'Fase 1 · 20–24 luglio', 'widget-loco' ); ?></div>
             <h2><?php esc_html_e( 'Il Codice LOCO', 'widget-loco' ); ?></h2>
             <p><?php esc_html_e( 'Radio Kiss Kiss diffonde in radio 5 elementi, uno alla volta. Ricomponili tutti per sbloccare l\'accesso alla candidatura.', 'widget-loco' ); ?></p>
         </div>
+        
         <div class="LOCO_li_code_tiles">
             <div class="LOCO_li_tile">L</div>
             <div class="LOCO_li_tile">O</div>
@@ -98,10 +109,21 @@ $loco_cta_url = is_user_logged_in()
             <div class="LOCO_li_tile LOCO_li_tile--locked">?</div>
             <div class="LOCO_li_tile LOCO_li_tile--locked">?</div>
         </div>
+        
     </section>
-
+    -->
+    <section class="LOCO_li_section LOCO_li_section--tint" id="come-funziona">
+        <div class="LOCO_li_section_head">
+            <div class="LOCO_eyebrow"><?php esc_html_e( 'Fase 1 · 20–24 luglio', 'widget-loco' ); ?></div>
+        </div>
+        <div style="width:100%; display:flex; justify-content:center; align-items:center; position:relative;">
+            <img src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/biglietto_loco.svg' ); ?>"
+                 alt="<?php esc_attr_e( 'Biglietto loco', 'widget-loco' ); ?>"
+                 style="width: 100%; max-width: 800px; height: auto;"/>
+        </div>
+    </section>
     <!-- ── COME PARTECIPARE ── -->
-    <section class="LOCO_li_section">
+    <section style="padding-bottom:50px;" class="LOCO_li_section">
         <div class="LOCO_li_section_head">
             <div class="LOCO_eyebrow"><?php esc_html_e( 'Fase 2 · entro il 28 luglio', 'widget-loco' ); ?></div>
             <h2><?php esc_html_e( 'Come partecipare', 'widget-loco' ); ?></h2>
@@ -132,7 +154,7 @@ $loco_cta_url = is_user_logged_in()
     </section>
 
     <!-- ── IL PREMIO ── -->
-    <section class="LOCO_li_section LOCO_li_section--tint">
+    <section style="background-image:url('<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/backgroundBiglietti.PNG' ); ?>')" class="LOCO_li_section LOCO_li_section--tint LOCO_premio_backgorund">
         <div class="LOCO_li_section_head">
             <div class="LOCO_eyebrow"><?php esc_html_e( 'Il premio', 'widget-loco' ); ?></div>
             <h2><?php esc_html_e( 'Cosa vinci', 'widget-loco' ); ?></h2>
@@ -164,16 +186,18 @@ $loco_cta_url = is_user_logged_in()
                 </div>
             </div>
         </div>
+       
+        <!-- ── BOTTOM CTA ── -->
+        <section class="LOCO_li_section">
+            <a href="<?php echo esc_url( $loco_cta_url ); ?>"
+            class="LOCO_li_btn_primary"
+            style="max-width:480px; margin:0 auto;">
+                <?php esc_html_e( 'Inserisci il Codice LOCO', 'widget-loco' ); ?>
+            </a>
+        </section>
     </section>
 
-    <!-- ── BOTTOM CTA ── -->
-    <section class="LOCO_li_section" style="padding-top:0;">
-        <a href="<?php echo esc_url( $loco_cta_url ); ?>"
-           class="LOCO_li_btn_primary"
-           style="max-width:480px; margin:0 auto;">
-            <?php esc_html_e( 'Inserisci il Codice LOCO', 'widget-loco' ); ?>
-        </a>
-    </section>
+    
 
     <?php include WIDGET_LOCO_PATH . 'public/views/partials/footer.php'; ?>
 

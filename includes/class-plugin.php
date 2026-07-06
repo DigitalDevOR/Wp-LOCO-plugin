@@ -17,7 +17,13 @@ class Plugin
         // Gestione CSS e JavaScript
         $assets = new Assets();
         $assets->register();
-        
+
+        // Crea/aggiorna la tabella se la versione DB non è allineata
+        if (get_option('widget_loco_db_version') !== WIDGET_LOCO_VERSION) {
+            Database::createTable();
+            update_option('widget_loco_db_version', WIDGET_LOCO_VERSION);
+        }
+
         // REST API
         $rest_api = new Rest_Api();
         $rest_api->register();

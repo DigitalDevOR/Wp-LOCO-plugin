@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
         © <?php echo esc_html( date( 'Y' ) ); ?> Radio Kiss Kiss ·
         <?php esc_html_e( 'Concorso a premi regolamentato.', 'widget-loco' ); ?>
         <br>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="<?php echo esc_url( WIDGET_LOCO_URL . 'public/docs/Regolamento_ConcorsoIbiza.pdf' ); ?>" download>
             <?php esc_html_e( 'Regolamento completo', 'widget-loco' ); ?>
         </a>
         &nbsp;·&nbsp;

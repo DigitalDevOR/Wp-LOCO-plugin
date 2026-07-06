@@ -18,8 +18,8 @@ if (!defined('ABSPATH')) {
 
                 <div class="LOCO_form_header" style="text-align:center; padding: 40px 0;">
                     <p class="LOCO_form_header_label"><?php esc_html_e( 'Candidatura inviata', 'widget-loco' ); ?></p>
-                    <h2 class="LOCO_form_header_title">🍒 <?php esc_html_e( 'Hai già partecipato!', 'widget-loco' ); ?></h2>
-                    <p style="color:var(--text-muted); font-size:15px; margin-top:12px">
+                    <h2 class="LOCO_already_candidate_header">🍒 <?php esc_html_e( 'Hai già partecipato!', 'widget-loco' ); ?></h2>
+                    <p class="LOCO_form_header_subtitle">
                         <?php esc_html_e( 'La tua candidatura è stata ricevuta. Ti contatteremo presto se sei tra i selezionati.', 'widget-loco' ); ?>
                     </p>
                 </div>
@@ -50,34 +50,35 @@ if (!defined('ABSPATH')) {
             <form class="LOCO_code_form">
 
                     <div class="LOCO_form_grid">
+                        <!-- Nome -->
                         <div class="LOCO_codice_loco_field full">
                             <label for="loco_nome"><?php esc_html_e( 'Nome *', 'widget-loco' ); ?></label>
                             <input type="text" id="loco_nome" name="nome"
                                 value="<?php echo isset( $nome ) ? esc_attr( $nome ) : ''; ?>"
                                 required>
                         </div>
-
+                        <!-- Cognome -->
                         <div class="LOCO_codice_loco_field full">
                             <label for="loco_cognome"><?php esc_html_e( 'Cognome *', 'widget-loco' ); ?></label>
                             <input type="text" id="loco_cognome" name="cognome"
                                 value="<?php echo isset( $cognome ) ? esc_attr( $cognome ) : ''; ?>"
                                 required>
                         </div>
-                
+                        <!-- Cellulare -->
                         <div class="LOCO_codice_loco_field full">
                             <label for="loco_cellulare"><?php esc_html_e( 'Cellulare', 'widget-loco' ); ?></label>
                             <input type="text" id="loco_cellulare" name="cellulare"
                                 value="<?php echo isset( $cellulare ) ? esc_attr( $cellulare ) : ''; ?>"
                                 >
                         </div>
-
+                        <!-- Email -->
                         <div class="LOCO_codice_loco_field full">
                             <label for="loco_email"><?php esc_html_e( 'Email', 'widget-loco' ); ?></label>
                             <input type="email" id="loco_email" name="email"
                                 value="<?php echo isset( $email ) ? esc_attr( $email ) : ''; ?>"
                                 readonly>
                         </div>
-
+                        <!-- URL Social -->
                         <div class="LOCO_codice_loco_field full">
                             <label for="loco_urlSocial"><?php esc_html_e( 'URL Social', 'widget-loco' ); ?></label>
                             <input type="text" id="loco_urlSocial" name="urlSocial"
@@ -85,7 +86,7 @@ if (!defined('ABSPATH')) {
                                 >
                         </div>
                     </div><!-- .LOCO_form_grid -->  
-                     <!-- Codice Loco -->
+                    <!-- Codice Loco -->
                     <div style="width: 100%;
                         display: flex;
                         flex-direction: column;
@@ -118,6 +119,12 @@ if (!defined('ABSPATH')) {
                         <div class="LOCO_codice_loco_field full">
                             <input type="text" id="loco_codice_4" name="codice_loco_4"
                                 placeholder="<?php esc_attr_e( 'QUARTO CODICE', 'widget-loco' ); ?>"
+                                maxlength="20" class="LOCO_codice_loco_input" required>
+                        </div>
+
+                        <div class="LOCO_codice_loco_field full">
+                            <input type="text" id="loco_codice_5" name="codice_loco_5"
+                                placeholder="<?php esc_attr_e( 'QUINTO CODICE', 'widget-loco' ); ?>"
                                 maxlength="20" class="LOCO_codice_loco_input" required>
                         </div>
                     </div>
@@ -159,8 +166,7 @@ if (!defined('ABSPATH')) {
                             <span>
                                 <?php esc_html_e( 'Dichiaro di essere residente in Italia o nella Repubblica di San Marino.', 'widget-loco' ); ?>
                             </span>
-                        </label>
-                        
+                        </label>                       
                     </div>
 
                     <button type="submit" class="LOCO_form_btn_submit">

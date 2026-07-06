@@ -2,6 +2,9 @@
 
 namespace Widget_Loco\Public_Frontend;
 
+use Widget_Loco\Includes\Database;
+use Widget_Loco\Includes\CheckDate;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -32,8 +35,14 @@ class Frontend_Renderer
      */
     public function render(array $atts = []): string
     {
+        $checkDate = new CheckDate();
+
         $view_param   = isset( $_GET['view'] ) ? sanitize_key( $_GET['view'] ) : '';
         $is_logged_in = is_user_logged_in();
+
+        $already_submitted = $is_logged_in
+            ? Database::userHasSubmitted( get_current_user_id() )
+            : false;
 
         if ( $view_param === 'form' || $view_param === 'login' ) {
             $view = $is_logged_in ? 'form' : 'guest';
@@ -51,6 +60,10 @@ class Frontend_Renderer
             $data['name']   = $user->display_name;
             $data['email']  = $user->user_email;
             $data['avatar'] = get_avatar_url( $user->ID );
+
+            if ( $already_submitted ) {
+                $data['already_submitted'] = true;
+            }
         }
 
         return widget_loco_view( self::VIEWS[ $view ], $data );

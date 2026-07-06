@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Widget Loco
  * Description: Plugin con shortcode, rendering server-side, admin dashboard e asset frontend.
- * Version: 1.2.0
+ * Version: 1.2.3
  * Author: Only Radio
  * Text Domain: widget-loco
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('WIDGET_LOCO_VERSION', '1.2.0');
+define('WIDGET_LOCO_VERSION', '1.2.3');
 define('WIDGET_LOCO_FILE', __FILE__);
 define('WIDGET_LOCO_PATH', plugin_dir_path(__FILE__));
 define('WIDGET_LOCO_URL', plugin_dir_url(__FILE__));
@@ -24,6 +24,7 @@ require_once WIDGET_LOCO_PATH . 'includes/class-rest-api.php';
 require_once WIDGET_LOCO_PATH . 'includes/class-database.php';
 require_once WIDGET_LOCO_PATH . 'public/class-frontend-renderer.php';
 require_once WIDGET_LOCO_PATH . 'admin/class-admin-page.php';
+require_once WIDGET_LOCO_PATH . 'includes/class-check-date.php';
 
 
 function widget_loco_run(): void

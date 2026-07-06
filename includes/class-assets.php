@@ -10,21 +10,54 @@ class Assets
 {
     public function register(): void
     {
-        add_action('wp_enqueue_scripts', [$this, 'registerFrontendAssets']);
+        // CSS il prima possibile nel <head>
+        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontendCss'], 1);
+
+        // JS più tardi, nel footer
+        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontendJs'], 20);
 
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
     }
 
-    public function registerFrontendAssets(): void
+    public function enqueueFrontendCss(): void
     {
-        wp_register_style(
+        wp_enqueue_style(
             'widget-loco-frontend',
             WIDGET_LOCO_URL . 'assets/frontend/css/frontend.css',
             [],
             WIDGET_LOCO_VERSION
         );
 
-        wp_register_script(
+        // Critical CSS minimo anti-FOUC
+        wp_add_inline_style(
+            'widget-loco-frontend',
+            '
+            .LOCO_li_section {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .LOCO_li_section_head,
+            .LOCO_li_prize_card,
+            .LOCO_li_section > section {
+                position: relative;
+                z-index: 2;
+            }
+
+            .LOCO_li_bg_tickets {
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+                pointer-events: none;
+                overflow: hidden;
+            }
+            '
+        );
+    }
+
+    public function enqueueFrontendJs(): void
+    {
+        wp_enqueue_script(
             'widget-loco-frontend',
             WIDGET_LOCO_URL . 'assets/frontend/js/frontend.js',
             [],
