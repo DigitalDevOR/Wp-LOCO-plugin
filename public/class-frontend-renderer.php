@@ -19,6 +19,7 @@ class Frontend_Renderer
         'landing' => 'public/views/landing.php',
         'guest'   => 'public/views/guest.php',
         'form'    => 'public/views/logged-in.php',
+        'concluso'=> 'public/views/concluso.php',
     ];
 
     /**
@@ -50,8 +51,15 @@ class Frontend_Renderer
             $view = 'landing';
         }
 
+        if ( $checkDate->getIsConcorsoTerminato() ) {
+            $view = 'concluso';
+        }
+
         $data = [
             'title' => $atts['title'] ?? 'Widget Loco',
+            'is_abreve_online' => $checkDate->getIsAbreveOnline(),
+            'is_app_active' => $checkDate->getIsAppActive(),
+            'is_concorso_terminato' => $checkDate->getIsConcorsoTerminato(),
         ];
 
         if ( $is_logged_in ) {
@@ -65,6 +73,9 @@ class Frontend_Renderer
                 $data['already_submitted'] = true;
             }
         }
+
+        //testing purpose
+        //$view = 'concluso';
 
         return widget_loco_view( self::VIEWS[ $view ], $data );
     }

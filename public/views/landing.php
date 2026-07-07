@@ -12,62 +12,67 @@ $loco_cta_url = is_user_logged_in()
 
 <main class="LOCO_main">
 
-    <?php include WIDGET_LOCO_PATH . 'public/views/partials/header.php'; ?>
+    <?php include WIDGET_LOCO_PATH . 'public/views/partials/gifHeader.php'; ?>
 
     <!-- ── HERO ── -->
-    <section class="LOCO_li_hero">
+    <section id="LOCO_hero" style="background-size: cover; max-height: 700px; background-image:url('<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/sfondorosso.jpg' ); ?>'); overflow: hidden;" class="LOCO_li_hero LOCO_section_background">
         <div class="LOCO_li_hero_content">
 
-            <div class="LOCO_eyebrow"><?php esc_html_e( 'Concorso esclusivo Radio Kiss Kiss', 'widget-loco' ); ?></div>
+            <div style="color:white;" class="LOCO_eyebrow"><?php esc_html_e( 'Concorso esclusivo Radio Kiss Kiss', 'widget-loco' ); ?></div>
 
             <div class="LOCO_li_partner_row">
-                <img class="LOCO_li_kk_mini"
+                <img style="background-color:white;" 
+                    class="LOCO_li_kk_mini"
                      src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/logo.png' ); ?>"
                      alt="<?php esc_attr_e( 'Kiss Kiss', 'widget-loco' ); ?>">
-                <!-- 
                 <div class="LOCO_li_x_mark">×</div>
-                <div class="LOCO_li_pacha_chip">🍒 PACHA</div>
-                -->
-                <div class="LOCO_li_x_mark">×</div>
-                <div class="LOCO_li_gordo_chip">
-                   <p style="margin: 0;"> GORDO </p>
+                <div style="width: 65px;
+                            padding-left: 5px;
+                            border: solid 1px white;
+                            border-radius: 10px;
+                            padding-right: 5px;
+                            padding-top: 5px;
+                            padding-bottom: 4px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;">
+                   <p style="color:white; margin: 0; font-family: 'Bebas Neue', sans-serif; font-size: 19px;"> GORDO </p>
                 </div>
             </div>
             
-            <!--
-                <h1 class="LOCO_li_hero_h1">VINCI<span class="LOCO_li_ibiza">IBIZA</span></h1>
-            -->
-            <div style="width:100%; display:flex; justify-content:center; align-items:center;">
+            <!-- Quanto sei LOCO image -->
+            <div id="quanto_sei_loco" style="width:100%; display:flex; justify-content:center; align-items:center;">
                 <img src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/quantoseiloco.svg' ); ?>"
                      alt="<?php esc_attr_e( 'Quanto sei LOCO', 'widget-loco' ); ?>"
                      style="width: 100%; max-width: 800px; height: auto;">
             </div>
-            <div class="LOCO_li_photo_card">
-                <img src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/gordo-pacha.jpg' ); ?>"
-                     alt="<?php esc_attr_e( 'Gordo al Pacha Ibiza', 'widget-loco' ); ?>">
-                <div class="LOCO_li_ribbon"><?php esc_html_e( 'Closing Party', 'widget-loco' ); ?></div>
-                <div class="LOCO_li_caption">Gordo · Pacha Ibiza</div>
+            
+            <!-- Testa Gordo image -->
+            <div id="testa_gordo">
+                <img src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/testa_gordo.png' ); ?>"
+                     alt="<?php esc_attr_e( 'Testa Gordo', 'widget-loco' ); ?>">
             </div>
-
-            <p class="LOCO_li_hero_copy">
-                <?php esc_html_e( 'Vivi il', 'widget-loco' ); ?>
-                <b><?php esc_html_e( 'Closing Party di Gordo al Pacha di Ibiza', 'widget-loco' ); ?></b>
-                <?php esc_html_e( 'insieme a Radio Kiss Kiss. Due biglietti, un volo, una notte da ricordare nell\'isola della musica.', 'widget-loco' ); ?>
-            </p>
 
         </div>
     </section>
 
     <!-- ── COUNTDOWN ── -->
     <section class="LOCO_li_countdown_section">
-        <div class="LOCO_li_countdown_bg"
-             style="background-image:url('<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/countdown-bg.jpg' ); ?>')"></div>
+        <!--<div class="LOCO_li_countdown_bg"
+             style="background-image:url('<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/countdown-bg.jpg' ); ?>')"></div> -->
         <div class="LOCO_li_countdown_overlay"></div>
         <div class="LOCO_li_countdown_content">
-            <div class="LOCO_li_deadline_pill">
-                ⏳ <?php esc_html_e( 'Candidati entro il 28 luglio 2026, ore 23:59', 'widget-loco' ); ?>
+            <div style="font-size: 18px" class="LOCO_li_deadline_pill">
+                <?php 
+                    if ( $data['is_abreve_online'] ) {
+                        esc_html_e( 'Le candidature apriranno il 20 luglio. Mancano ancora:', 'widget-loco' ); 
+                    } elseif ( $data['is_app_active'] ) {
+                        esc_html_e( '⏳ Candidati entro il 28 luglio 2026, ore 23:59', 'widget-loco' ); 
+                    } 
+                ?>
             </div>
-            <div class="LOCO_li_countdown" data-deadline="2026-07-28T23:59:00">
+
+            <div class="LOCO_li_countdown" data-deadline=<?php $data['is_abreve_online'] ? print( '"2026-07-20T00:00:00+02:00"' ) : print( '"2026-07-28T23:59:00+02:00"' ); ?>>
                 <div>
                     <div class="LOCO_li_num">00</div>
                     <div class="LOCO_li_lab"><?php esc_html_e( 'giorni', 'widget-loco' ); ?></div>
@@ -85,9 +90,31 @@ $loco_cta_url = is_user_logged_in()
                     <div class="LOCO_li_lab"><?php esc_html_e( 'sec', 'widget-loco' ); ?></div>
                 </div>
             </div>
-            <a href="<?php echo esc_url( $loco_cta_url ); ?>" class="LOCO_li_btn_primary">
-                <?php esc_html_e( 'Inserisci il Codice LOCO', 'widget-loco' ); ?>
-            </a>
+            <?php 
+                if ( $data['is_app_active'] ) {
+
+                    $url = esc_url( $loco_cta_url );
+                    $content = esc_html__( 'Inserisci il Codice LOCO', 'widget-loco' );
+
+                    echo '
+                            <a href="' . $url . '" class="LOCO_li_btn_primary">
+                                ' . $content . '
+                            </a>
+                        ';
+                }
+
+                if ( $data['is_abreve_online'] ) {
+                    $linkRegolamento = esc_url( WIDGET_LOCO_URL . 'public/docs/Regolamento_ConcorsoIbiza.pdf' );
+                    $content = esc_html__( 'Scarica il regolamento', 'widget-loco' );
+                    echo '
+                            <a href="'.$linkRegolamento.'" download class="LOCO_li_btn_primary">
+                                ' . $content . '
+                            </a>
+                        ';
+                }
+            
+            ?>
+           
             <a href="#come-funziona" class="LOCO_li_btn_secondary LOCO_li_btn_secondary--light">
                 <?php esc_html_e( 'Come si trova il codice? ↓', 'widget-loco' ); ?>
             </a>
@@ -189,11 +216,30 @@ $loco_cta_url = is_user_logged_in()
        
         <!-- ── BOTTOM CTA ── -->
         <section class="LOCO_li_section">
-            <a href="<?php echo esc_url( $loco_cta_url ); ?>"
-            class="LOCO_li_btn_primary"
-            style="max-width:480px; margin:0 auto;">
-                <?php esc_html_e( 'Inserisci il Codice LOCO', 'widget-loco' ); ?>
-            </a>
+             <?php 
+                if ( $data['is_app_active'] ) {
+
+                    $url = esc_url( $loco_cta_url );
+                    $content = esc_html__( 'Inserisci il Codice LOCO', 'widget-loco' );
+
+                    echo '
+                            <a href="' . $url . '" class="LOCO_li_btn_primary"  style="max-width:480px; margin:0 auto;">
+                                ' . $content . '
+                            </a>
+                        ';
+                }
+
+                if ( $data['is_abreve_online'] ) {
+                    $linkRegolamento = esc_url( WIDGET_LOCO_URL . 'public/docs/Regolamento_ConcorsoIbiza.pdf' );
+                    $content = esc_html__( 'Scarica il regolamento', 'widget-loco' );
+                    echo '
+                            <a href="'.$linkRegolamento.'" download class="LOCO_li_btn_primary" style="max-width:480px; margin:0 auto;">
+                                ' . $content . '
+                            </a>
+                        ';
+                }
+            
+            ?>
         </section>
     </section>
 

@@ -82,5 +82,134 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = message;
         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+});
 
+
+let LOCOParallaxTicking = false;
+let LOCOParallaxStart = -100;
+let LOCOParallaxEnd = 0;
+
+const LOCO_START_TESTA = 100;
+const LOCO_DISTANZA = 150;
+
+const LOCO_DISTANZA_QUANTO = 150;
+const LOCO_DISTANZA_TESTA = 300;
+
+function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+}
+
+function getParallaxConfig() {
+    const width = window.innerWidth;
+
+    if (width <= 420) {
+        return {
+            startTesta: 350,
+            moveQuanto: 600,
+            moveTesta: 400,
+            maxQuanto: 420,
+            maxTesta: 240
+        }
+    }
+
+    if (width <= 480) {
+        return {
+            startTesta: 300,
+            moveQuanto: 400,
+            moveTesta: 400,
+            maxQuanto: 215,
+            maxTesta: 100
+        };
+    }
+
+    if (width <= 768) {
+        return {
+            startTesta: 180,
+            moveQuanto: 600,
+            moveTesta: 300,
+            maxQuanto: 440,
+            maxTesta: -20
+        };
+    }
+
+    if (width <= 1024) {
+        return {
+            startTesta: 220,
+            moveQuanto: 600,
+            moveTesta: 400,
+            maxQuanto: 360,
+            maxTesta: 0
+        };
+    }
+
+    return {
+        startTesta: 340,
+        moveQuanto: 600,
+        moveTesta: 500,
+        maxQuanto: 500,
+        maxTesta: 80
+    };
+}
+
+function setupParallax() {
+    const section = document.querySelector(".LOCO_li_hero");
+    if (!section) return;
+
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+
+    LOCOParallaxStart = sectionTop;
+    LOCOParallaxEnd = sectionTop + sectionHeight;
+}
+
+function handleParallax() {
+    const quanto = document.getElementById("quanto_sei_loco");
+    const testa = document.getElementById("testa_gordo");
+
+    if (!quanto || !testa) return;
+
+    const config = getParallaxConfig();
+    const scrollY = window.scrollY;
+
+    const progress = clamp(
+        (scrollY - LOCOParallaxStart) /
+        (LOCOParallaxEnd - LOCOParallaxStart),
+        0,
+        1
+    );
+
+    let quantoY = progress * config.moveQuanto;
+    let testaY = config.startTesta - progress * config.moveTesta;
+
+    quantoY = clamp(quantoY, 0, config.maxQuanto);
+    testaY = clamp(testaY, config.maxTesta, config.startTesta);
+
+    quanto.style.transform = `translateY(${quantoY}px)`;
+    testa.style.transform = `translateY(${testaY}px)`;
+}
+
+function handleScroll(e) {
+    e.preventDefault();
+    console.log('Scroll event detected');
+    if (LOCOParallaxTicking) return;
+
+    LOCOParallaxTicking = true;
+
+    requestAnimationFrame(() => {
+        handleParallax();
+        LOCOParallaxTicking = false;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setupParallax();
+
+    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("resize", () => {
+        setupParallax();
+        handleParallax();
+    });
+
+    handleParallax();
 });
