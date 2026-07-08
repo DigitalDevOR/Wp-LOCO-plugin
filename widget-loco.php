@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Widget Loco
  * Description: Plugin con shortcode, rendering server-side, admin dashboard e asset frontend.
- * Version: 1.2.3
+ * Version: 1.3.0
  * Author: Only Radio
  * Text Domain: widget-loco
  */
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('WIDGET_LOCO_VERSION', '1.2.3');
+define('WIDGET_LOCO_VERSION', '1.3.0');
 define('WIDGET_LOCO_FILE', __FILE__);
 define('WIDGET_LOCO_PATH', plugin_dir_path(__FILE__));
 define('WIDGET_LOCO_URL', plugin_dir_url(__FILE__));
