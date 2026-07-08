@@ -70,7 +70,7 @@ class Admin_Page
         $filters = ['search' => $search, 'validated' => $validated];
         $offset  = ($paged - 1) * self::PER_PAGE;
         $rows    = Database::getCandidature($filters, self::PER_PAGE, $offset);
-        $total   = Database::countCandidature($filters);
+        $total   = Database::countCandidatureAdmin($filters);
         $pages   = (int) ceil($total / self::PER_PAGE);
 
         echo widget_loco_view('admin/views/candidature-page.php', compact(

@@ -1,29 +1,38 @@
 <?php
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+        use Widget_Loco\Includes\CheckDate;
 
-$current_action   = isset( $_GET['action'] ) ? sanitize_key( $_GET['action'] ) : '';
-$is_register_view = ( $current_action === 'register' );
-$page_url         = get_permalink();
-$form_url         = add_query_arg( 'view', 'form', $page_url );
-$guest_base_url   = add_query_arg( 'view', 'login', $page_url );
-$register_url     = add_query_arg( 'action', 'register', $guest_base_url );
-$login_url        = $guest_base_url;
+        if (!defined('ABSPATH')) {
+            exit;
+        }
+        
+        $checkDate = new CheckDate();
 
-// Messaggi di errore registrazione
-$reg_errors = [
-    'nonce'            => __( 'Richiesta non valida. Riprova.', 'widget-loco' ),
-    'disabled'         => __( 'Le registrazioni sono attualmente disabilitate.', 'widget-loco' ),
-    'empty'            => __( 'Compila tutti i campi obbligatori.', 'widget-loco' ),
-    'email'            => __( 'Inserisci un indirizzo email valido.', 'widget-loco' ),
-    'password_mismatch'=> __( 'Le password non coincidono.', 'widget-loco' ),
-    'password_short'   => __( 'La password deve essere di almeno 8 caratteri.', 'widget-loco' ),
-    'user_exists'      => __( 'Username già in uso. Scegline un altro.', 'widget-loco' ),
-    'email_exists'     => __( 'Esiste già un account con questa email.', 'widget-loco' ),
-    'create'           => __( 'Errore durante la creazione dell\'account. Riprova.', 'widget-loco' ),
-];
+        if ($checkDate->getIsConcorsoTerminato() || $checkDate->getIsAbreveOnline() || ! $checkDate->getIsAppActive()) {
+            wp_safe_redirect(get_permalink());
+            exit;
+        }
+
+        $current_action   = isset( $_GET['action'] ) ? sanitize_key( $_GET['action'] ) : '';
+        $is_register_view = ( $current_action === 'register' );
+        $page_url         = get_permalink();
+        $form_url         = add_query_arg( 'view', 'form', $page_url );
+        $guest_base_url   = add_query_arg( 'view', 'login', $page_url );
+        $register_url     = add_query_arg( 'action', 'register', $guest_base_url );
+        $login_url        = $guest_base_url;
+
+        // Messaggi di errore registrazione
+        $reg_errors = [
+            'nonce'            => __( 'Richiesta non valida. Riprova.', 'widget-loco' ),
+            'disabled'         => __( 'Le registrazioni sono attualmente disabilitate.', 'widget-loco' ),
+            'empty'            => __( 'Compila tutti i campi obbligatori.', 'widget-loco' ),
+            'email'            => __( 'Inserisci un indirizzo email valido.', 'widget-loco' ),
+            'password_mismatch'=> __( 'Le password non coincidono.', 'widget-loco' ),
+            'password_short'   => __( 'La password deve essere di almeno 8 caratteri.', 'widget-loco' ),
+            'user_exists'      => __( 'Username già in uso. Scegline un altro.', 'widget-loco' ),
+            'email_exists'     => __( 'Esiste già un account con questa email.', 'widget-loco' ),
+            'create'           => __( 'Errore durante la creazione dell\'account. Riprova.', 'widget-loco' ),
+        ];
 
 ?>
 
@@ -31,8 +40,14 @@ $reg_errors = [
 
     <?php include WIDGET_LOCO_PATH . 'public/views/partials/header.php'; ?>
 
-    <div class="LOCO_auth_wrap">
+    <div style="width:100%; display:flex; justify-content:center; align-items:center; padding-top:40px; padding-left:20px; padding-right:20px;">
+        <div style="width:480px">
+            <?php include WIDGET_LOCO_PATH . 'public/views/partials/quantoSeiLoco.php'; ?>
+        </div>
+    </div>
 
+
+    <div class="LOCO_auth_wrap">
         <?php if ( $is_register_view ) : ?>
 
             <!-- ───── FORM REGISTRAZIONE ───── -->
@@ -44,7 +59,7 @@ $reg_errors = [
                 <p class="LOCO_login_error"><?php echo esc_html( $err_msg ); ?></p>
             <?php endif; ?>
 
-            <form class="LOCO_login_form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+            <form  class="LOCO_login_form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
                 <input type="hidden" name="action"      value="loco_register">
                 <input type="hidden" name="redirect_to" value="<?php echo esc_url( $form_url ); ?>">
                 <?php wp_nonce_field( 'loco-register-nonce', 'loco_register_nonce' ); ?>
@@ -100,6 +115,11 @@ $reg_errors = [
                 <button type="submit" class="LOCO_cta">
                     <?php esc_html_e( 'Crea account', 'widget-loco' ); ?>
                 </button>
+
+                <p style="margin-bottom: 4rem;" class="LOCO_auth_toggle">
+                    <?php esc_html_e( 'Hai già un account?', 'widget-loco' ); ?>
+                    <a href="<?php echo esc_url( $login_url ); ?>"><?php esc_html_e( 'Accedi', 'widget-loco' ); ?></a>
+                </p>
             </form>
 
             <p class="LOCO_auth_toggle">

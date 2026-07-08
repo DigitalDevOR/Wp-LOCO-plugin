@@ -1,6 +1,7 @@
 <?php
 
 namespace Widget_Loco\Includes;
+use Widget_Loco\Includes\Send_Email;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -19,6 +20,8 @@ class Rest_Api
 
         // Rimanda i login falliti alla form custom invece di wp-login.php
         add_action('wp_login_failed', [$this, 'redirectFailedLogin'], 10, 2);
+
+        add_filter('rest_pre_serve_request', [$this, 'serveHtmlResponse'], 10, 4);
     }
 
     /**
@@ -35,6 +38,12 @@ class Rest_Api
         register_rest_route('widget-loco/v1', '/submit-form', [
             'methods'             => 'POST',
             'callback'            => [$this, 'handleLocoForm'],
+            'permission_callback' => '__return_true',
+        ]);
+
+        register_rest_route('widget-loco/v1', '/candidature', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'getCandidature'],
             'permission_callback' => '__return_true',
         ]);
     }
@@ -92,6 +101,13 @@ class Rest_Api
      */
     public function handleRegistration(): void
     {
+        $checkDate = new CheckDate();
+
+        if ($checkDate->getIsConcorsoTerminato() || $checkDate->getIsAbreveOnline() || ! $checkDate->getIsAppActive()) {
+            wp_safe_redirect(get_permalink());
+            exit;
+        }
+
         $redirect_to = isset($_POST['redirect_to'])
             ? esc_url_raw(wp_unslash($_POST['redirect_to']))
             : home_url();
@@ -101,7 +117,6 @@ class Rest_Api
             $redirect_to
         );
 
-      
         // Controlla se la registrazione è abilitata in WordPress
         if (! get_option('users_can_register')) {
             wp_safe_redirect(add_query_arg(['reg' => 'error', 'err' => 'disabled'], $register_url));
@@ -158,14 +173,22 @@ class Rest_Api
 
         // Imposta ruolo subscriber (permessi minimi)
         $user = new \WP_User($user_id);
-        $user->set_role('subscriber');
+        $user->set_role('community');
 
         // Auto-login immediato
-        wp_set_current_user($user_id);
-        wp_set_auth_cookie($user_id, false);
+        // wp_set_current_user($user_id);
+        // wp_set_auth_cookie($user_id, false);
 
         // Reindirizza alla form del codice LOCO
-        wp_safe_redirect($redirect_to);
+        $login_url = add_query_arg(
+        [
+            'view'   => 'login',
+            'action' => 'login',
+        ],
+            $redirect_to
+        );
+
+        wp_safe_redirect($login_url);
         exit;
     }
 
@@ -174,6 +197,15 @@ class Rest_Api
      */
     public function handleLocoForm(\WP_REST_Request $request): \WP_REST_Response
     {
+        
+        $checkDate = new CheckDate();
+
+        if ($checkDate->getIsConcorsoTerminato() || $checkDate->getIsAbreveOnline() || ! $checkDate->getIsAppActive()) {
+            wp_safe_redirect(get_permalink());
+            exit;
+        }
+
+
         $user = wp_get_current_user();
 
         if ($user->ID === 0) {
@@ -275,6 +307,9 @@ class Rest_Api
             ], 500);
         }
 
+        $sendEmail = new Send_Email();
+        $sendEmail->sendEmail($email, 'Kiss Kiss, Concorso LOCO - Candidatura ricevuta', [], []);
+
         return new \WP_REST_Response([
             'success' => true,
             'message' => 'Candidatura ricevuta! Ti contatteremo presto.',
@@ -308,5 +343,50 @@ class Rest_Api
         $host = preg_replace('/^www\./', '', $host);
 
         return in_array($host, ['instagram.com', 'facebook.com'], true);
+    }
+
+    public function serveHtmlResponse($served, $result, $request, $server): bool
+    {
+        if ($request->get_route() !== '/widget-loco/v1/candidature') {
+            return $served;
+        }
+
+        $data = $result->get_data();
+
+        if (! is_string($data)) {
+            return $served;
+        }
+
+        header('Content-Type: text/html; charset=' . get_option('blog_charset'));
+
+        echo $data;
+
+        return true;
+    }
+
+    public function getCandidature(\WP_REST_Request $request): \WP_REST_Response
+    {
+        $search = sanitize_text_field($request->get_param('search') ?? '');
+        $page = max(1, (int) ($request->get_param('page') ?? 1));
+
+        $per_page = (int) ($request->get_param('per_page') ?? 25);
+        $per_page = max(1, $per_page);
+
+        $offset = ($page - 1) * $per_page;
+
+        $candidature = Database::getCandidaturePaginated($per_page, $offset, $search);
+        $total       = Database::countCandidature($search);
+        $total_pages = max(1, (int) ceil($total / $per_page));
+
+        $html = widget_loco_view('public/views/candidature.php', [
+            'candidature' => $candidature,
+            'page'        => $page,
+            'per_page'    => $per_page,
+            'total'       => $total,
+            'total_pages' => $total_pages,
+            'search'      => $search,
+        ]);
+
+        return new \WP_REST_Response($html, 200);
     }
 }

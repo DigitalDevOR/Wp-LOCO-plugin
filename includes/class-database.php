@@ -163,13 +163,73 @@ class Database
         return $wpdb->get_results($sql, ARRAY_A) ?: [];
     }
 
+    public static function getCandidaturePaginated(int $limit, int $offset, string $search = ''): array
+    {
+        global $wpdb;
+
+        $table = self::tableName();
+
+        if (! empty($search)) {
+            $like = '%' . $wpdb->esc_like($search) . '%';
+            return $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT * FROM {$table} WHERE email LIKE %s OR nome LIKE %s OR cognome LIKE %s ORDER BY created_at DESC LIMIT %d OFFSET %d",
+                    $like,
+                    $like,
+                    $like,
+                    $limit,
+                    $offset
+                )
+            );
+        }
+
+        return $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM {$table} ORDER BY created_at DESC LIMIT %d OFFSET %d",
+                $limit,
+                $offset
+            )
+        );
+    }
+    
     /**
      * Conta le candidature con gli stessi filtri (per la paginazione).
      *
      * @param array $filters Stesse chiavi di getCandidature().
      * @return int
      */
-    public static function countCandidature(array $filters = []): int
+    public static function countCandidature(string $search = ''): int
+    {
+        global $wpdb;
+
+        $table = self::tableName();
+
+        if ($search !== '') {
+            $like = '%' . $wpdb->esc_like($search) . '%';
+
+            return (int) $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT COUNT(*) FROM {$table}
+                    WHERE nome LIKE %s
+                        OR cognome LIKE %s
+                        OR email LIKE %s",
+                    $like,
+                    $like,
+                    $like
+                )
+            );
+        }
+
+        return (int) $wpdb->get_var("SELECT COUNT(*) FROM {$table}");
+    }
+
+     /**
+     * Conta le candidature con gli stessi filtri (per la paginazione).
+     *
+     * @param array $filters Stesse chiavi di getCandidature().
+     * @return int
+     */
+    public static function countCandidatureAdmin(array $filters = []): int
     {
         global $wpdb;
 

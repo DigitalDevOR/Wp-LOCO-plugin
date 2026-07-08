@@ -20,6 +20,7 @@ class Frontend_Renderer
         'guest'   => 'public/views/guest.php',
         'form'    => 'public/views/logged-in.php',
         'concluso'=> 'public/views/concluso.php',
+        'candidature' => 'public/views/candidature.php',
     ];
 
     /**
@@ -29,6 +30,7 @@ class Frontend_Renderer
      *   - (nessun param) → landing.php (sempre visibile)
      *   - ?view=form     → form codice LOCO se autenticato, altrimenti login
      *   - ?view=login    → login/registrazione se non autenticato, altrimenti form
+     *   - ?view=candidature → visualizza le candidature sempre
      *
      * @param array $atts Attributi ricevuti dallo shortcode.
      *
@@ -78,9 +80,20 @@ class Frontend_Renderer
             $view = 'concluso';
         }
 
-        //$view = 'concluso';
-
         
         return widget_loco_view( self::VIEWS[ $view ], $data );
+    }
+
+    public function renderCandidature(array $data): string
+    {
+        
+        $data = [
+            'title' => $data['title'] ?? 'Candidature',
+            'is_abreve_online' => $checkDate->getIsAbreveOnline(),
+            'is_app_active' => $checkDate->getIsAppActive(),
+            'candidature' => $data['candidature'] ?? [],
+        ];
+
+        return widget_loco_view( self::VIEWS['candidature'], $data );
     }
 }

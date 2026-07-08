@@ -746,7 +746,7 @@ body {
 }
 
 .LOCO_section_background {
-    min-height: calc(100vh - 175px);
+    min-height: calc(100vh - 160px);
 }
 
 .LOCO_li_partner_row {

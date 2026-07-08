@@ -16,6 +16,7 @@ define('WIDGET_LOCO_FILE', __FILE__);
 define('WIDGET_LOCO_PATH', plugin_dir_path(__FILE__));
 define('WIDGET_LOCO_URL', plugin_dir_url(__FILE__));
 
+
 require_once WIDGET_LOCO_PATH . 'includes/helpers.php';
 require_once WIDGET_LOCO_PATH . 'includes/class-plugin.php';
 require_once WIDGET_LOCO_PATH . 'includes/class-assets.php';
@@ -25,6 +26,7 @@ require_once WIDGET_LOCO_PATH . 'includes/class-database.php';
 require_once WIDGET_LOCO_PATH . 'public/class-frontend-renderer.php';
 require_once WIDGET_LOCO_PATH . 'admin/class-admin-page.php';
 require_once WIDGET_LOCO_PATH . 'includes/class-check-date.php';
+require_once WIDGET_LOCO_PATH . 'includes/class-send-email.php';
 
 
 function widget_loco_run(): void

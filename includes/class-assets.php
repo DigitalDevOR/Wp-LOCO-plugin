@@ -14,7 +14,7 @@ class Assets
         add_action('wp_enqueue_scripts', [$this, 'enqueueFrontendCss'], 1);
 
         // JS più tardi, nel footer
-        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontendJs'], 20);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontendJs']);
 
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminAssets']);
     }

@@ -251,5 +251,4 @@ $loco_cta_url = is_user_logged_in()
     
 
     <?php include WIDGET_LOCO_PATH . 'public/views/partials/footer.php'; ?>
-
 </main>

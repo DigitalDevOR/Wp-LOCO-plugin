@@ -1,8 +1,17 @@
 <?php
 
+use Widget_Loco\Includes\CheckDate;
+
 if (!defined('ABSPATH')) {
     exit;
 }
+
+        $checkDate = new CheckDate();
+
+        if ($checkDate->getIsConcorsoTerminato() || $checkDate->getIsAbreveOnline() || ! $checkDate->getIsAppActive()) {
+            wp_safe_redirect(get_permalink());
+            exit;
+        }
 
 ?>
 
@@ -183,7 +192,7 @@ if (!defined('ABSPATH')) {
                         🍒 <?php esc_html_e( 'Invia la mia candidatura', 'widget-loco' ); ?>
                     </button>
                 
-                    <p class="LOCO_one_shot_note">
+                    <p style="margin-bottom: 135px;" class="LOCO_one_shot_note">
                         <?php esc_html_e( 'Ogni partecipante può inviare una sola candidatura', 'widget-loco' ); ?>
                     </p>
             </form>
