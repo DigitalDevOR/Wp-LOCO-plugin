@@ -287,10 +287,7 @@ body {
 }
 
 .LOCO_form_section {
-    background: var(--surface);
-    border-top: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
-    padding: 200px 24px 200px;
+    padding: 24px 24px 24px;
 }
 
 .LOCO_form_inner {
@@ -653,6 +650,7 @@ body {
     unicode-bidi: isolate;
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .LOCO_footer p {
@@ -735,7 +733,7 @@ body {
         radial-gradient(circle at 15% 0%, rgba(33,150,200,0.14), transparent 55%),
         radial-gradient(circle at 90% 30%, rgba(228,41,61,0.08), transparent 50%),
         linear-gradient(180deg, var(--sky) 0%, #ffffff 70%);
-    padding: 44px 20px 56px;
+    padding-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -748,7 +746,7 @@ body {
 }
 
 .LOCO_section_background {
-    min-height: calc(100vh - 79.33px);
+    min-height: calc(100vh - 175px);
 }
 
 .LOCO_li_partner_row {
@@ -912,6 +910,8 @@ body {
     font-weight: 700;
     font-size: 13px;
     margin-bottom: 22px;
+    justify-content: center;
+    min-width: 285px;
 }
 
 .LOCO_li_countdown {
@@ -997,6 +997,13 @@ body {
     padding-top:50px;
 }
 
+@media (max-width: 520px) {
+    .LOCO_li_section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 .LOCO_li_section--tint {
     background: var(--sky);
     padding-top:50px;
@@ -1038,7 +1045,7 @@ body {
     width: 52px;
     height: 52px;
     border-radius: 14px;
-    background: linear-gradient(160deg, var(--cherry), #a3172a);
+    background: linear-gradient(160deg, #0099cd, #a3172a);
     display: flex;
     align-items: center;
     justify-content: center;

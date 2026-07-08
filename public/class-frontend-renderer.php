@@ -59,7 +59,6 @@ class Frontend_Renderer
             'title' => $atts['title'] ?? 'Widget Loco',
             'is_abreve_online' => $checkDate->getIsAbreveOnline(),
             'is_app_active' => $checkDate->getIsAppActive(),
-            'is_concorso_terminato' => $checkDate->getIsConcorsoTerminato(),
         ];
 
         if ( $is_logged_in ) {
@@ -74,9 +73,14 @@ class Frontend_Renderer
             }
         }
 
-        //testing purpose
+        //check concorso concluso
+        if ( $checkDate->getIsConcorsoTerminato() ) {
+            $view = 'concluso';
+        }
+
         //$view = 'concluso';
 
+        
         return widget_loco_view( self::VIEWS[ $view ], $data );
     }
 }

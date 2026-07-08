@@ -100,16 +100,17 @@ function clamp(value, min, max) {
 }
 
 function getParallaxConfig() {
+
     const width = window.innerWidth;
 
-    if (width <= 420) {
+    if (width <= 441) {
         return {
             startTesta: 350,
             moveQuanto: 600,
             moveTesta: 400,
-            maxQuanto: 420,
-            maxTesta: 240
-        }
+            maxQuanto: 335,
+            maxTesta: 80
+        };
     }
 
     if (width <= 480) {
@@ -118,7 +119,7 @@ function getParallaxConfig() {
             moveQuanto: 400,
             moveTesta: 400,
             maxQuanto: 215,
-            maxTesta: 100
+            maxTesta: 170
         };
     }
 

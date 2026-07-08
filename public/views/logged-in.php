@@ -14,21 +14,31 @@ if (!defined('ABSPATH')) {
     <div class="LOCO_form_section" id="partecipa">
         <div class="LOCO_form_inner">
 
+            <div style="width:100%; display:flex; justify-content:center; align-items:center;">
+                <div style="width:480px">
+                    <?php include WIDGET_LOCO_PATH . 'public/views/partials/quantoSeiLoco.php'; ?>
+                </div>
+            </div>
+            
+
             <?php if ( ! empty( $already_submitted ) ) : ?>
 
-                <div class="LOCO_form_header" style="text-align:center; padding: 40px 0;">
-                    <p class="LOCO_form_header_label"><?php esc_html_e( 'Candidatura inviata', 'widget-loco' ); ?></p>
-                    <h2 class="LOCO_already_candidate_header">🍒 <?php esc_html_e( 'Hai già partecipato!', 'widget-loco' ); ?></h2>
-                    <p class="LOCO_form_header_subtitle">
-                        <?php esc_html_e( 'La tua candidatura è stata ricevuta. Ti contatteremo presto se sei tra i selezionati.', 'widget-loco' ); ?>
-                    </p>
-                </div>
+                <section style="margin: 0 auto;" class="LOCO_li_section LOCO_li_hero_content">
+                    <div class="LOCO_form_header" style="text-align:center; padding: 40px 0;">
+                        <p class="LOCO_form_header_label"><?php esc_html_e( 'Candidatura inviata', 'widget-loco' ); ?></p>
+                        <h2 class="LOCO_already_candidate_header">🍒 <?php esc_html_e( 'Hai già partecipato!', 'widget-loco' ); ?></h2>
+                        <p class="LOCO_form_header_subtitle">
+                            <?php esc_html_e( 'La tua candidatura è stata ricevuta. Ti contatteremo presto se sei tra i selezionati.', 'widget-loco' ); ?>
+                        </p>
+                    </div>
+                </section>
+
+              
 
             <?php else : ?>
 
-            <div class="LOCO_form_header">
-                <p class="LOCO_form_header_label"><?php esc_html_e( 'Fase 2 – Candidatura', 'widget-loco' ); ?></p>
-                <h2 class="LOCO_form_header_title"><?php esc_html_e( 'La tua candidatura', 'widget-loco' ); ?></h2>
+            <div style="margin-top:40px;" class="LOCO_form_header">
+                <h2 class="LOCO_form_header_label"><?php esc_html_e( 'Fase 2 – Candidatura', 'widget-loco' ); ?></h2>
                 <p style="color:var(--text-muted); font-size:14px">
                     <?php
                     if ( isset( $name ) && $name ) {

@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 $loco_cta_url = is_user_logged_in()
     ? add_query_arg( 'view', 'form', get_permalink() )
     : add_query_arg( 'view', 'login', get_permalink() );
-
 ?>
 
 <main class="LOCO_main">
@@ -16,6 +15,7 @@ $loco_cta_url = is_user_logged_in()
 
     <!-- ── HERO ── -->
     <section id="LOCO_hero" style="background-size: cover; max-height: 700px; background-image:url('<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/sfondorosso.jpg' ); ?>'); overflow: hidden;" class="LOCO_li_hero LOCO_section_background">
+        
         <div class="LOCO_li_hero_content">
 
             <div style="color:white;" class="LOCO_eyebrow"><?php esc_html_e( 'Concorso esclusivo Radio Kiss Kiss', 'widget-loco' ); ?></div>
@@ -56,6 +56,8 @@ $loco_cta_url = is_user_logged_in()
         </div>
     </section>
 
+    <?php include WIDGET_LOCO_PATH . 'public/views/partials/gifHeader.php'; ?>
+
     <!-- ── COUNTDOWN ── -->
     <section class="LOCO_li_countdown_section">
         <!--<div class="LOCO_li_countdown_bg"
@@ -65,7 +67,7 @@ $loco_cta_url = is_user_logged_in()
             <div style="font-size: 18px" class="LOCO_li_deadline_pill">
                 <?php 
                     if ( $data['is_abreve_online'] ) {
-                        esc_html_e( 'Le candidature apriranno il 20 luglio. Mancano ancora:', 'widget-loco' ); 
+                        esc_html_e( 'A breve online', 'widget-loco' ); 
                     } elseif ( $data['is_app_active'] ) {
                         esc_html_e( '⏳ Candidati entro il 28 luglio 2026, ore 23:59', 'widget-loco' ); 
                     } 
@@ -120,8 +122,10 @@ $loco_cta_url = is_user_logged_in()
             </a>
         </div>
     </section>
-     
-    <!-- ── IL CODICE LOCO ── 
+    
+
+
+    <!-- ── IL CODICE LOCO ── -->
     <section class="LOCO_li_section LOCO_li_section--tint" id="come-funziona">
         <div class="LOCO_li_section_head">
             <div class="LOCO_eyebrow"><?php esc_html_e( 'Fase 1 · 20–24 luglio', 'widget-loco' ); ?></div>
@@ -138,7 +142,7 @@ $loco_cta_url = is_user_logged_in()
         </div>
         
     </section>
-    -->
+    <!--
     <section class="LOCO_li_section LOCO_li_section--tint" id="come-funziona">
         <div class="LOCO_li_section_head">
             <div class="LOCO_eyebrow"><?php esc_html_e( 'Fase 1 · 20–24 luglio', 'widget-loco' ); ?></div>
@@ -149,6 +153,7 @@ $loco_cta_url = is_user_logged_in()
                  style="width: 100%; max-width: 800px; height: auto;"/>
         </div>
     </section>
+    -->
     <!-- ── COME PARTECIPARE ── -->
     <section style="padding-bottom:50px;" class="LOCO_li_section">
         <div class="LOCO_li_section_head">
