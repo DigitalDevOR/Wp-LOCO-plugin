@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
             <?php esc_html_e( 'Regolamento completo', 'widget-loco' ); ?>
         </a>
         &nbsp;·&nbsp;
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://kisskiss.it/privacy-policy/" target="_blank" rel="noopener noreferrer">
             <?php esc_html_e( 'Privacy Policy', 'widget-loco' ); ?>
         </a>
     </p>

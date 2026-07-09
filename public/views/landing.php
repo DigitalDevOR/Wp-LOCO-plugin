@@ -21,8 +21,7 @@ $loco_cta_url = is_user_logged_in()
             <div style="color:white;" class="LOCO_eyebrow"><?php esc_html_e( 'Concorso esclusivo Radio Kiss Kiss', 'widget-loco' ); ?></div>
 
             <div class="LOCO_li_partner_row">
-                <img style="background-color:white;" 
-                    class="LOCO_li_kk_mini"
+                <img  class="LOCO_li_kk_mini"
                      src="<?php echo esc_url( WIDGET_LOCO_URL . 'public/images/logo.png' ); ?>"
                      alt="<?php esc_attr_e( 'Kiss Kiss', 'widget-loco' ); ?>">
                 <div class="LOCO_li_x_mark">×</div>
@@ -134,11 +133,11 @@ $loco_cta_url = is_user_logged_in()
         </div>
         
         <div class="LOCO_li_code_tiles">
-            <div class="LOCO_li_tile">L</div>
-            <div class="LOCO_li_tile">O</div>
-            <div class="LOCO_li_tile">C</div>
-            <div class="LOCO_li_tile LOCO_li_tile--locked">?</div>
-            <div class="LOCO_li_tile LOCO_li_tile--locked">?</div>
+            <div style="width: 80px;" class="LOCO_li_tile">Codice1</div>
+            <div style="width: 80px;" class="LOCO_li_tile">Codice2</div>
+            <div style="width: 80px;" class="LOCO_li_tile">Codice3</div>
+            <div style="width: 80px;" class="LOCO_li_tile LOCO_li_tile--locked">?</div>
+            <div style="width: 80px;" class="LOCO_li_tile LOCO_li_tile--locked">?</div>
         </div>
         
     </section>
@@ -179,7 +178,7 @@ $loco_cta_url = is_user_logged_in()
                 <div class="LOCO_li_step_n">3</div>
                 <div>
                     <h3><?php esc_html_e( 'Racconta perché tocca a te', 'widget-loco' ); ?></h3>
-                    <p><?php esc_html_e( 'Rispondi in massimo 500 caratteri: perché dovresti vivere il Closing Party di Gordo al Pacha con Radio Kiss Kiss?', 'widget-loco' ); ?></p>
+                    <p><?php esc_html_e( 'Rispondi in massimo 500 caratteri: perché dovresti vivere il Closing Party di Gordo al Pacha con Radio Kiss Kiss?')?><br><br><?php esc_html_e( 'Non farti eliminare per un copia-incolla sbagliato! Nel form di candidatura inserisci il link corretto al tuo profilo Instagram: se è errato o non funziona, la candidatura non sarà valida.', 'widget-loco' ); ?></p>
                 </div>
             </div>
         </div>

@@ -146,12 +146,12 @@
 
             <form class="LOCO_login_form" method="post" action="<?php echo esc_url( wp_login_url() ); ?>">
                 <div class="LOCO_field">
-                    <label for="loco_user_login"><?php esc_html_e( 'Username o Email', 'widget-loco' ); ?></label>
+                    <label for="loco_user_login"><?php esc_html_e( 'Email', 'widget-loco' ); ?></label>
                     <input
-                        type="text"
+                        type="email"
                         id="loco_user_login"
                         name="log"
-                        autocomplete="username"
+                        autocomplete="email"
                         required
                     >
                 </div>

@@ -10,7 +10,7 @@ class Send_Email
 {
     public static function sendEmail($to, $subject, $headers = [], $attachments = [])
     {
-        $message = "Ti ringraziomo per esserti candiato al concorso LOCO!<br><br> verrai contattato su questa email per comunicarti se sarai selezionato.<br><br> Grazie!";
+        $message = "Ti ringraziamo per esserti candiato al concorso LOCO!<br><br> verrai contattato su questa email per comunicarti se sarai selezionato.<br><br> Grazie!";
         // Imposta l'header Content-Type per inviare email in formato HTML
         $headers[] = 'Content-Type: text/html; charset=UTF-8';
 

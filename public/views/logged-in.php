@@ -92,14 +92,14 @@ if (!defined('ABSPATH')) {
                         </div>
                         <!-- Email -->
                         <div class="LOCO_codice_loco_field full">
-                            <label for="loco_email"><?php esc_html_e( 'Email', 'widget-loco' ); ?></label>
+                            <label for="loco_email"><?php esc_html_e( 'Email *', 'widget-loco' ); ?></label>
                             <input type="email" id="loco_email" name="email"
                                 value="<?php echo isset( $email ) ? esc_attr( $email ) : ''; ?>"
                                 readonly>
                         </div>
                         <!-- URL Social -->
                         <div class="LOCO_codice_loco_field full">
-                            <label for="loco_urlSocial"><?php esc_html_e( 'URL Social', 'widget-loco' ); ?></label>
+                            <label for="loco_urlSocial"><?php esc_html_e( 'URL Social *', 'widget-loco' ); ?></label>
                             <input type="text" id="loco_urlSocial" name="urlSocial"
                                 value="<?php echo isset( $urlSocial ) ? esc_attr( $urlSocial ) : ''; ?>"
                                 >
@@ -151,7 +151,7 @@ if (!defined('ABSPATH')) {
                     <!-- Motivazione -->
                     <div class="LOCO_codice_loco_field full">
                         <p class="LOCO_form_motivazione_question">
-                            "<?php esc_html_e( 'Perché proprio tu dovresti vincere il Closing Party di Gordo al Pacha?', 'widget-loco' ); ?>"
+                            "<?php esc_html_e( 'Perché proprio tu dovresti vincere il Closing Party di Gordo al Pacha? *', 'widget-loco' ); ?>"
                         </p>
                         <textarea style="border-radius: 10px; border: 1px solid #00000014;"
                                   id="loco_motivazione" 
@@ -170,20 +170,20 @@ if (!defined('ABSPATH')) {
                         <label class="LOCO_form_privacy_note">
                             <input style="margin-top:3px" type="checkbox" name="privacy" value="1" required>
                             <span>
-                                <?php esc_html_e( 'Acconsento al trattamento dei miei dati personali ai sensi del D.Lgs. 196/2003 e del GDPR 2016/679 per la partecipazione al concorso.', 'widget-loco' ); ?>
-                                <a href="#" style="color:var(--kk-blue)"><?php esc_html_e( 'Leggi il regolamento completo.', 'widget-loco' ); ?></a>
+                                <?php esc_html_e( 'Acconsento al trattamento dei miei dati personali ai sensi del D.Lgs. 196/2003 e del GDPR 2016/679 per la partecipazione al concorso. *', 'widget-loco' ); ?>
+                                <a href="<?php echo esc_url( WIDGET_LOCO_URL . 'public/docs/Regolamento_ConcorsoIbiza.pdf' ); ?>" target="_blank" style="color:var(--kk-blue)"><?php esc_html_e( 'Leggi il regolamento completo.', 'widget-loco' ); ?></a>
                             </span>
                         </label>
                         <label class="LOCO_form_privacy_note">
                             <input style="margin-top:3px" type="checkbox" name="age" value="1" required>
                             <span>
-                                <?php esc_html_e( 'Dichiaro di avere almeno 18 anni.', 'widget-loco' ); ?>
+                                <?php esc_html_e( 'Dichiaro di avere almeno 18 anni. *', 'widget-loco' ); ?>
                             </span>
                         </label>
                         <label class="LOCO_form_privacy_note">
                             <input style="margin-top:3px" type="checkbox" name="residenza" value="1" required>
                             <span>
-                                <?php esc_html_e( 'Dichiaro di essere residente in Italia o nella Repubblica di San Marino.', 'widget-loco' ); ?>
+                                <?php esc_html_e( 'Dichiaro di essere residente in Italia o nella Repubblica di San Marino. *', 'widget-loco' ); ?>
                             </span>
                         </label>                       
                     </div>
