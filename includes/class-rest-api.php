@@ -46,6 +46,12 @@ class Rest_Api
             'callback'            => [$this, 'getCandidature'],
             'permission_callback' => '__return_true',
         ]);
+        
+        register_rest_route('widget-loco/v1', '/candidature-login', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'candidatureLogin'],
+            'permission_callback' => '__return_true',
+        ]);
     }
 
     /**
@@ -366,27 +372,46 @@ class Rest_Api
 
     public function getCandidature(\WP_REST_Request $request): \WP_REST_Response
     {
+        $password = sanitize_text_field($request->get_param('password') ?? '');
+
+        if ($password !== 'LumekoPardi84') {
+            $html = '
+                <div style="width:100vw; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;"> 
+                    <h2 style="margin-bottom:20px; font-family:Arial, sans-serif;">Accedi per visualizzare le candidature</h2>
+                    <form id="candidature-password-form">
+                        <input style="padding:10px 16px;border:1px solid #ddd;border-radius:6px;margin-bottom:10px;" type="password" name="password" placeholder="Inserisci password" required>
+                        <button type="submit" style="padding:10px 16px;border:0;border-radius:6px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer;">Accedi</button>
+                        <p id="candidature-error" style="display:none;color:red;">Password non valida</p>
+                    </form>
+                </div>
+                
+            ';
+
+            return new \WP_REST_Response($html, 200);
+        }
+
+        // qui renderizzi solo se password corretta
         $search = sanitize_text_field($request->get_param('search') ?? '');
         $page = max(1, (int) ($request->get_param('page') ?? 1));
 
-        $per_page = (int) ($request->get_param('per_page') ?? 25);
-        $per_page = max(1, $per_page);
-
+        $per_page = max(1, (int) ($request->get_param('per_page') ?? 25));
         $offset = ($page - 1) * $per_page;
 
         $candidature = Database::getCandidaturePaginated($per_page, $offset, $search);
-        $total       = Database::countCandidature($search);
+        $total = Database::countCandidature($search);
         $total_pages = max(1, (int) ceil($total / $per_page));
 
         $html = widget_loco_view('public/views/candidature.php', [
             'candidature' => $candidature,
-            'page'        => $page,
-            'per_page'    => $per_page,
-            'total'       => $total,
+            'page' => $page,
+            'per_page' => $per_page,
+            'total' => $total,
             'total_pages' => $total_pages,
-            'search'      => $search,
+            'search' => $search,
         ]);
 
         return new \WP_REST_Response($html, 200);
     }
+
+    
 }

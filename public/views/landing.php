@@ -68,7 +68,7 @@ $loco_cta_url = is_user_logged_in()
                     if ( $data['is_abreve_online'] ) {
                         esc_html_e( 'A breve online', 'widget-loco' ); 
                     } elseif ( $data['is_app_active'] ) {
-                        esc_html_e( '⏳ Candidati entro il 28 luglio 2026, ore 23:59', 'widget-loco' ); 
+                        esc_html_e( 'Candidature aperte per', 'widget-loco' ); 
                     } 
                 ?>
             </div>
