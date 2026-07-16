@@ -24,19 +24,19 @@ class CheckDate
 
     public function getIsAbreveOnline(): bool
     {
-        //return $this->today() <= $this->abreveOnlineMaxDate;
-        return false;
+        return $this->today() <= $this->abreveOnlineMaxDate;
+        //return false;
     }
 
     public function getIsAppActive(): bool
     {
-        //return $this->today() > $this->abreveOnlineMaxDate && $this->today() <= $this->appActivateMaxDate;
-        return true;
+        return $this->today() > $this->abreveOnlineMaxDate && $this->today() <= $this->appActivateMaxDate;
+        //return true;
     }
 
     public function getIsConcorsoTerminato(): bool
     {
-        //return $this->today() > $this->appActivateMaxDate;
-        return false;
+        return $this->today() > $this->appActivateMaxDate;
+        //return false;
     }
 }
