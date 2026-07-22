@@ -123,7 +123,7 @@ class Rest_Api
             $redirect_to
         );
 
-        // Controlla se la registrazione è abilitata in WordPress
+        // Controlla se la registrazione Ã¨ abilitata in WordPress
         if (! get_option('users_can_register')) {
             wp_safe_redirect(add_query_arg(['reg' => 'error', 'err' => 'disabled'], $register_url));
             exit;
@@ -158,13 +158,13 @@ class Rest_Api
             exit;
         }
 
-        // Username già in uso
+        // Username giÃ  in uso
         if (username_exists($username)) {
             wp_safe_redirect(add_query_arg(['reg' => 'error', 'err' => 'user_exists'], $register_url));
             exit;
         }
 
-        // Email già in uso
+        // Email giÃ  in uso
         if (email_exists($email)) {
             wp_safe_redirect(add_query_arg(['reg' => 'error', 'err' => 'email_exists'], $register_url));
             exit;
@@ -267,11 +267,11 @@ class Rest_Api
             ], 422);
         }
 
-        // Controlla se l'utente ha già inviato una candidatura
+        // Controlla se l'utente ha giÃ  inviato una candidatura
         if (Database::userHasSubmitted($user->ID)) {
             return new \WP_REST_Response([
                 'success' => false,
-                'message' => 'Hai già inviato una candidatura.',
+                'message' => 'Hai giÃ  inviato una candidatura.',
             ], 409);
         }
 
@@ -309,7 +309,7 @@ class Rest_Api
             return new \WP_REST_Response([
                 'success' => false,
                 'message' => 'Errore durante il salvataggio. Riprova.',
-                'error' => $inserted->get_error_message() ?? 'Errore sconosciuto',
+                'error' => 'Errore sconosciuto',
             ], 500);
         }
 
@@ -326,17 +326,42 @@ class Rest_Api
      * Verifica che i codici LOCO inseriti siano corretti.
      * TODO: implementare il confronto con i codici validi quando disponibili.
      */
-    private function areCodesValid(string $c1, string $c2, string $c3, string $c4, string $c5): bool
-    {
-        if (empty($c1) || empty($c2) || empty($c3) || empty($c4) || empty($c5)) {
-            return false;
-        }
 
-        // TODO: aggiungere qui il confronto con i codici validi
-        return true;
+	function areCodesValid(
+    string $c1,
+    string $c2,
+    string $c3,
+    string $c4,
+    string $c5
+): bool {
+    $result = true;
+
+    $codes = [
+        mb_strtoupper(trim($c1), 'UTF-8'),
+        mb_strtoupper(trim($c2), 'UTF-8'),
+        mb_strtoupper(trim($c3), 'UTF-8'),
+        mb_strtoupper(trim($c4), 'UTF-8'),
+        mb_strtoupper(trim($c5), 'UTF-8'),
+    ];
+
+    $validCodes = [
+        "LA MUSICA PI\u{00D9} BELLA",
+        'SUONA SOLO SU RADIO KISS KISS',
+        'TI RENDE LOCO',
+        'TI PORTA AL PARTY DI GORDO',
+        'AL PACHA DI IBIZA',
+    ];
+
+    foreach ($codes as $index => $code) {
+        if ($code === '' || $code !== $validCodes[$index]) {
+            $result = false;
+        }
     }
 
-    /**
+    return $result;
+}
+
+     /**
      * Verifica che l'URL sia un profilo Instagram o Facebook valido.
      */
     private function isValidSocialUrl(string $url): bool
